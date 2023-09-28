@@ -2,25 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FilterBookRequest;
 use App\Models\Book;
+use App\Models\Author;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
-use App\Models\Author;
 
 class BookController extends Controller
 {
-    public function index()
+    public function index(FilterBookRequest $request)
     {
+        $searchQuery = $request->search;
+        $authorId = $request->author_id;
+
+        $books = Book::when($searchQuery, function ($query) use ($searchQuery) {
+            $query->where('title', 'like', '%' . $searchQuery . '%');
+        })
+        ->when($authorId, function ($query) use ($authorId) {
+            $query->whereHas('authors', function ($subquery) use ($authorId) {
+                $subquery->where('authors.id', $authorId);
+            });
+        })
+        ->get();
+
         return view('books.index', [
-            'books' => Book::all()
+            'books' => $books,
+            'authors' => Author::all(),
         ]);
     }
 
+
     public function create(): View
     {
-        return view('books.store' , [
+        return view('books.store', [
             'allAuthors' => Author::all()->pluck('name', 'id')->toArray()
         ]);
     }
