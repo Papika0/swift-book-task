@@ -9,6 +9,8 @@ class Book extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function authors()
     {
         return $this->belongsToMany(Author::class);
