@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
-use Illuminate\Auth\Events\Login;
-use Illuminate\Http\Request;
+use App\Models\Author;
+use App\Models\Book;
 
 class AuthController extends Controller
 {
@@ -29,7 +29,10 @@ class AuthController extends Controller
 
     public function dashboard()
     {
-        return view('dashboard');
+        return view('dashboard', [
+            'booksCount' => Book::count(),
+            'authorsCount' => Author::count(),
+        ]);
     }
 
     public function logout()
