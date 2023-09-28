@@ -166,4 +166,6 @@ Project structure is fairly straitforward(at least for laravel developers)...
 For more information about project standards, take a look at these docs:
 * [Laravel](https://laravel.com/docs/6.x)
 
+[DrawSQL link](https://drawsql.app/teams/datos-team-2/diagrams/swfit)
+
 <img src="readme/assets/drawSql.png" style="position: relative; top: 4px" />
