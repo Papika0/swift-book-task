@@ -43,11 +43,23 @@
                                     class="w-6 h-6 fill-current inline-block">
                                 <span class="">Books</span>
                             </a>
+                            <a href="{{ route('books.create') }}"
+                                class="text-sm font-medium text-gray-700 py-2 px-2 hover:bg-teal-500 hover:text-white hover:text-base rounded-md transition duration-150 ease-in-out">
+                                <img src="https://cdn-icons-png.flaticon.com/256/1828/1828757.png"
+                                    class="w-6 h-6 fill-current inline-block">
+                                <span class="">Add Book</span>
+                            </a>
                             <a href="{{ route('authors.index') }}"
                                 class="text-sm font-medium text-gray-700 py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">
                                 <img src="https://cdn-icons-png.flaticon.com/256/1948/1948164.png"
                                     class="w-6 h-6 fill-current inline-block">
                                 <span class="">Authors</span>
+                            </a>
+                            <a href="{{ route('authors.create') }}"
+                                class="text-sm font-medium text-gray-700 py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">
+                                <img src="https://cdn-icons-png.flaticon.com/256/1828/1828757.png"
+                                    class="w-6 h-6 fill-current inline-block">
+                                <span class="">Add Author</span>
                             </a>
                             <a href="{{ route('logout') }}"
                                 class="text-sm font-medium text-gray-700 py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">

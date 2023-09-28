@@ -18,17 +18,21 @@ class BookController extends Controller
         ]);
     }
 
-    // public function create(): View
-    // {
-    //     return view('books.store');
-    // }
+    public function create(): View
+    {
+        return view('books.store' , [
+            'allAuthors' => Author::all()->pluck('name', 'id')->toArray()
+        ]);
+    }
 
-    // public function store(StoreBookRequest $request): RedirectResponse
-    // {
-    //     Book::create($request->validated());
+    public function store(StoreBookRequest $request): RedirectResponse
+    {
+        $book = Book::create($request->validated());
+        $authorIds = collect($request->input('authors'))->flatten()->all();
+        $book->authors()->sync($authorIds);
 
-    //     return redirect()->route('books.index');
-    // }
+        return redirect()->route('books.index');
+    }
 
     public function edit(Book $book): View
     {
