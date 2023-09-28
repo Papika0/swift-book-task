@@ -24,21 +24,22 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/logout', 'logout')->name('logout');
 });
 
+Route::middleware('auth')->group(function () {
+    Route::prefix('/books')->controller(BookController::class)->group(function () {
+        Route::get('/', 'index')->name('books.index');
+        Route::get('/create', 'create')->name('books.create');
+        Route::post('/', 'store')->name('books.store');
+        Route::get('/{book}/edit', 'edit')->name('books.edit');
+        Route::put('/{book}', 'update')->name('books.update');
+        Route::delete('/{book}', 'destroy')->name('books.destroy');
+    });
 
-Route::prefix('/books')->controller(BookController::class)->middleware('auth')->group(function () {
-    Route::get('/', 'index')->name('books.index');
-    Route::get('/create', 'create')->name('books.create');
-    Route::post('/', 'store')->name('books.store');
-    Route::get('/{book}/edit', 'edit')->name('books.edit');
-    Route::put('/{book}', 'update')->name('books.update');
-    Route::delete('/{book}', 'destroy')->name('books.destroy');
-});
-
-Route::prefix('/authors')->controller(AuthorController::class)->middleware('auth')->group(function () {
-    Route::get('/', 'index')->name('authors.index');
-    Route::get('/create', 'create')->name('authors.create');
-    Route::post('/', 'store')->name('authors.store');
-    Route::get('/{author}/edit', 'edit')->name('authors.edit');
-    Route::put('/{author}', 'update')->name('authors.update');
-    Route::delete('/{author}', 'destroy')->name('authors.destroy');
+    Route::prefix('/authors')->controller(AuthorController::class)->group(function () {
+        Route::get('/', 'index')->name('authors.index');
+        Route::get('/create', 'create')->name('authors.create');
+        Route::post('/', 'store')->name('authors.store');
+        Route::get('/{author}/edit', 'edit')->name('authors.edit');
+        Route::put('/{author}', 'update')->name('authors.update');
+        Route::delete('/{author}', 'destroy')->name('authors.destroy');
+    });
 });

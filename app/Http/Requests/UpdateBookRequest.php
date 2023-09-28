@@ -10,7 +10,7 @@ class UpdateBookRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
-            'publication_year' => 'required',
+            'publication_year' => 'required|numeric',
             'status' => 'required|in:Free,Busy',
             'authors' => 'required|array',
         ];
