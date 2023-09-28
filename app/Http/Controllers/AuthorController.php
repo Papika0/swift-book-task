@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\Author;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
 
 class AuthorController extends Controller
@@ -16,17 +18,20 @@ class AuthorController extends Controller
         ]);
     }
 
-    // public function create(): View
-    // {
-    //     return view('authors.store');
-    // }
+    public function create(): View
+    {
+        return view('authors.store', ['books' => Book::all()->pluck('title', 'id')->toArray()]);
+    }
 
-    // public function store(StoreBookRequest $request): RedirectResponse
-    // {
-    //     Author::create($request->validated());
+    public function store(StoreAuthorRequest $request): RedirectResponse
+    {
+        $author = Author::create($request->validated());
 
-    //     return redirect()->route('authors.index');
-    // }
+        $bookIds = collect($request->input('books'))->flatten()->all();
+        $author->books()->sync($bookIds);
+
+        return redirect()->route('authors.index');
+    }
 
     public function edit(Author $author): View
     {
