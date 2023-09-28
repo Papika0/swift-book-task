@@ -37,19 +37,19 @@
                             </button>
                         </div>
                         <div id="menu" class="flex flex-col space-y-2">
-                            <a href=""
+                            <a href="{{ route('books.index') }}"
                                 class="text-sm font-medium text-gray-700 py-2 px-2 hover:bg-teal-500 hover:text-white hover:text-base rounded-md transition duration-150 ease-in-out">
                                 <img src="https://cdn-icons-png.flaticon.com/256/29/29302.png"
                                     class="w-6 h-6 fill-current inline-block">
                                 <span class="">Books</span>
                             </a>
-                            <a href=""
+                            <a href="{{ route('authors.index') }}"
                                 class="text-sm font-medium text-gray-700 py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">
                                 <img src="https://cdn-icons-png.flaticon.com/256/1948/1948164.png"
                                     class="w-6 h-6 fill-current inline-block">
                                 <span class="">Authors</span>
                             </a>
-                            <a href=""
+                            <a href="{{ route('logout') }}"
                                 class="text-sm font-medium text-gray-700 py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">
                                 <img src="https://cdn-icons-png.flaticon.com/256/11820/11820531.png"
                                     class="w-6 h-6 fill-current inline-block">
@@ -59,7 +59,9 @@
                         </div>
                     </div>
                 </div>
-                {{ $slot }}
+                <div class="overflow-auto w-full mx-10 rounded-md">
+                    {{ $slot }}
+                </div>
         </body>
     </body>
 </x-layout>
